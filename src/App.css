@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.App{
+
+    height: 100vh;
+}
+body{
+    background-color: black;
+    overflow-y: scroll;
+
+}
+li {
+    border-bottom: 2px solid white;
+}
+ul li:hover {
+    border-bottom-color: red !important;
+}
+ul li:hover {
+    color: red;
+    border-bottom-color: red !important;
+}
+
+ul li:hover a {
+    color: red;
+    border-bottom-color: red !important;
+}
+.active {
+    color: red;
+    border-bottom: 4px solid red !important;
+}
+    
