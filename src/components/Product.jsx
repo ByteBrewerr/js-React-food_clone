@@ -15,6 +15,7 @@ const Product = ({img, name, description, price, quantity, type, toppings}) => {
 
     const isAlreadyInCart = (product) => {
         return cartProducts.some(item => {
+            console.log('a')
             return item.name === product.name && JSON.stringify(item.toppings) === JSON.stringify(product.toppings);
         });
         };
