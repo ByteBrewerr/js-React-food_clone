@@ -1,15 +1,41 @@
 import React from 'react';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {setPopUpVisible } from '../Redux/slices/productPopUpSlice';
 import {addProduct} from "../Redux/slices/cartSlice";
+import { toast } from "react-toastify";
 
-const Product = ({img, name, description, price, quantity, type,}) => {
+const Product = ({img, name, description, price, quantity, type, toppings}) => {
     const dispatch = useDispatch()  
-    const product = {img, name, description, price,quantity}
+    const product = {img, name, description, price, quantity, toppings}
+    const cartProducts = useSelector((state)=> state.cart.products)
     let haveOptionButton = null
     if (type==='Бургеры'){
         haveOptionButton = true
     }
+
+    const isAlreadyInCart = (product) => {
+        return cartProducts.some(item => {
+            return item.name === product.name && JSON.stringify(item.toppings) === JSON.stringify(product.toppings);
+        });
+        };
+
+    const handleAddToCart = () => {
+        if (!isAlreadyInCart({name: product.name, count: 1, toppings: toppings, })){
+            dispatch(addProduct({
+                name: name,
+                count: 1,
+                price: price,
+                toppings: [],
+                img: img,
+                description: description,
+            }));      
+        }
+        else{
+            console.log('incart')
+        }
+        toast(`1x ${product.name} добавлен в корзину`)
+    }
+
     return (
         <div className='w-100 bg-gray-700  mt-4 rounded-lg'>
             <img className='w-100 rounded-t-lg cursor-pointer h-[172.5px]' src={img} alt=""/>
@@ -32,13 +58,7 @@ const Product = ({img, name, description, price, quantity, type,}) => {
             </div>
             <div className='flex justify-between items-center px-4 py-4'>
                 <p className='text-red-400 text-xl font-bold'>{price} Р</p>
-                <button onClick={()=>dispatch(addProduct({name: name,
-                    count: 1,
-                    price: price,
-                    toppings: [],
-                    img: img,
-                    description: description,
-                    }))}>В КОРЗИНУ</button>
+                <button onClick={()=>handleAddToCart()}>В КОРЗИНУ</button>
             </div>
         </div>
     );

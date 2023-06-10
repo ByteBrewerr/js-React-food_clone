@@ -10,7 +10,6 @@ export default function CartProduct({name, description, img, toppings, id}) {
   const count = useSelector((state)=> state.cart.products[id].count)
   const price = useSelector((state)=> state.cart.products[id].price)
   let toppingsString = ''
-  console.log(count)
 
   return (
     <div className='flex border-b-[1px] border-gray-500 justify-between'>

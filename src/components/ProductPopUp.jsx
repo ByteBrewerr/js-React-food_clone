@@ -5,6 +5,8 @@ import Topping from './Topping';
 import { IoIosAdd, IoIosRemove } from 'react-icons/io';
 import { increaseCount } from '../Redux/slices/productPopUpSlice';
 import { decreaseCount } from '../Redux/slices/productPopUpSlice';
+import { toast } from "react-toastify";
+
 
 const ProductPopUp = () => {
     const isPopUpVisible = useSelector((state) => state.productPopUp.isPopUpVisible);
@@ -17,10 +19,11 @@ const ProductPopUp = () => {
     const priceCalculate = ()=>{
       return (selectedProduct.price + totalToppingPrice) * productCount
     }
-    const addProductInCart = async () => {
+    const addProductToCart = async () => {
       try {
         dispatch(createProductWithOptions());
         dispatch(setPopUpInvisible());
+        toast(`${productCount}x ${selectedProduct.name} добавлен в корзину`)
       } catch (error) {
         alert(error);
       }
@@ -64,8 +67,9 @@ const ProductPopUp = () => {
                     ))}                               
                   </div>
                 </div>
+             
                 <div className='flex justify-center mt-4'>
-                  <button onClick={()=>addProductInCart()} className='bg-red-900 p-2 rounded-lg w-[80%]'>
+                  <button onClick={()=>addProductToCart()} className='bg-red-900 p-2 rounded-lg w-[80%]'>
                     <p>ДОБАВИТЬ ТОВАР НА {priceCalculate()} Р.</p>
                   </button>
                 </div>

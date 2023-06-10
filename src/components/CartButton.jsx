@@ -13,7 +13,7 @@ export default function Cart() {
         if(!isEmpty){
             dispatch(addProduct(selectedProduct));
         }
-    },[selectedProduct, dispatch, isEmpty])
+    },[selectedProduct, isEmpty])
 
     let totalPrice = 0;
     cartProducts.forEach((product)=>{

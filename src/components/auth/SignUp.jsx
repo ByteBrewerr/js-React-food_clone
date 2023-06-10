@@ -19,6 +19,7 @@ export default function SignUp() {
             const userCollection = collection(db, 'users')
             const q = query(userCollection, where('email', '==', email ))
             addDoc(userCollection, {userName: userName,email: user.email,id: user.uid})
+            
             dispatch(setUser({
                 email: user.email,
                 id: user.uid,

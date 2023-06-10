@@ -92,7 +92,6 @@ export const productPopUpSlice = createSlice({
               const cost = topping.price * topping.count;
               return total + cost;
             }, 0);
-          
             const selectedProductWithToppings = {
               name: state.selectedProduct.name,
               count: state.productCount,

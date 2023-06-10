@@ -12,7 +12,23 @@ function Form({ handleAuth, title}) {
       <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <h2 className="text-2xl font-bold mb-4">{title}</h2>
         <form className="mb-4">
-          
+          {isLoginPage 
+            ?
+            <></>
+            :
+            <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+              Name
+            </label>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="userName"
+              type="userName"
+              placeholder="Ivan"
+              value={userName}
+              onChange={(e) => setUserName(e.target.value)}
+            />
+          </div>
           }          
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">

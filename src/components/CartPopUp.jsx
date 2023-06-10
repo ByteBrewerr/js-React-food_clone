@@ -22,29 +22,16 @@ export default function CartPopUp() {
                     :
                     <></>
                 }
-                {products.map((product, id)=>{
-                    if (product.toppings) {
-                        return <CartProduct
-                            key={id}
-                            id={id}
-                            name={product.name}
-                            description={product.description}
-                            img={product.img}
-                            count={product.count}
-                            toppings={product.toppings}
-                        />
-                    }
-                    else {
-                        return <CartProduct
-                            key={id}
-                            id={id}
-                            name={product.name}
-                            description={product.description}
-                            img={product.img}
-                            count={product.count}
-                            toppings={[]}
-                        />
-                    }
+                {products.map((product, id)=>{              
+                    return <CartProduct
+                        key={id}
+                        id={id}
+                        name={product.name}
+                        description={product.description}
+                        img={product.img}
+                        count={product.count}
+                        toppings={product.toppings ? product.toppings : []}
+                    />             
                 })}
             </div> 
             :
