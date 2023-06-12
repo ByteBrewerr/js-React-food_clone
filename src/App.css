@@ -21,19 +21,15 @@ li {
     border-bottom: 2px solid white;
 }
 ul li:hover {
-    border-bottom-color: red !important;
-}
-ul li:hover {
-    color: red;
-    border-bottom-color: red !important;
+    color: rgb(247, 82, 82);
+    border-bottom-color: rgb(247, 82, 82) !important;
 }
 
 ul li:hover a {
-    color: red;
-    border-bottom-color: red !important;
+    color: rgb(247, 82, 82);
 }
 .active {
-    color: red;
-    border-bottom: 4px solid red !important;
+    color: rgb(247, 82, 82);
+    border-bottom: 4px solid rgb(247, 82, 82) !important;
 }
     

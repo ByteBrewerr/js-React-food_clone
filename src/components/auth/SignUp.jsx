@@ -27,11 +27,10 @@ export default function SignUp() {
                 userName: userName
             }))
             getDocs(q).then(res=> {
-                const users = res.docs.map(doc =>({
+                    res.docs.map(doc =>({
                     data:doc.data(),
                     id: doc.id,
                 }))
-                console.log(users)
             })
 
             navigate('/main');

@@ -22,7 +22,7 @@ export default function Cart() {
     })
     return (
         <>
-            <button onClick={()=>dispatch(setVisible())} className='bg-red-800 rounded-lg p-2 flex space-x-4 items-center'>
+            <button onClick={()=>dispatch(setVisible())} className='bg-red-700 rounded-lg p-2 flex space-x-4 items-center hover:bg-red-500'>
                 <BsCart4/>
                 <p>{totalPrice} Р.</p>
             </button>

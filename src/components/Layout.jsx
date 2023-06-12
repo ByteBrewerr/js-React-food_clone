@@ -1,11 +1,12 @@
 import React from 'react';
 import MainNavigation from './MainNavigation';
+import { Outlet } from 'react-router-dom';
 
-function Layout({ children }) {
+function Layout() {
   return (
     <div  className='w-[1200px] m-auto'>
       <MainNavigation />
-      {children}
+      <Outlet/>
     </div>
   );
 }

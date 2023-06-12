@@ -10,7 +10,9 @@ import useIsInCart from '../hooks/use-isInCart';
 import { increaseProductCount } from '../Redux/slices/cartSlice';
 
 
+
 const ProductPopUp = () => {
+  const dispatch = useDispatch()
     const isPopUpVisible = useSelector((state) => state.productPopUp.isPopUpVisible);
     const selectedProduct = useSelector((state) => state.productPopUp.selectedProduct);
     const toppings = useSelector((state) => state.productPopUp.toppings);
@@ -21,12 +23,11 @@ const ProductPopUp = () => {
 
     const { isInCart, id } = useIsInCart({name: selectedProduct.name, toppings: selectedToppings});
 
-    const dispatch = useDispatch()
-
     const priceCalculate = ()=>{
       return (selectedProduct.price + totalToppingPrice) * productCount
     }
     const addProductToCart = () => {
+
       if (!isInCart){
         dispatch(createProductWithOptions());
       }

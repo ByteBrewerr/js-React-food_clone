@@ -5,6 +5,8 @@ import {addProduct} from "../Redux/slices/cartSlice";
 import { toast } from "react-toastify";
 import { increaseProductCount } from '../Redux/slices/cartSlice';
 import useIsInCart from '../hooks/use-isInCart';
+import { useNavigate } from 'react-router-dom';
+import useAuth from '../hooks/use-auth';
 
 const Product = ({img, name, description, price, quantity, type, toppings}) => {
     const dispatch = useDispatch()  
@@ -12,6 +14,10 @@ const Product = ({img, name, description, price, quantity, type, toppings}) => {
     const product = {img, name, description, price, quantity, toppings}
 
     const { isInCart, id } = useIsInCart({name: product.name, toppings: toppings});
+    const {isAuth} = useAuth()
+
+    const navigate = useNavigate()
+
 
     let haveOptionButton = null
     if (type==='Бургеры'){
@@ -48,7 +54,7 @@ const Product = ({img, name, description, price, quantity, type, toppings}) => {
                     <p>{quantity}</p>
                     {haveOptionButton
                         ? 
-                        <button onClick={()=>dispatch(setPopUpVisible(product))} className='bg-red-500 p-2 rounded-lg'>
+                        <button onClick={isAuth ? ()=>dispatch(setPopUpVisible(product)) : ()=>navigate('/register')} className='bg-red-500 p-2 rounded-lg'>
                             Опции
                         </button>
                         :
@@ -58,7 +64,7 @@ const Product = ({img, name, description, price, quantity, type, toppings}) => {
             </div>
             <div className='flex justify-between items-center px-4 py-4'>
                 <p className='text-red-400 text-xl font-bold'>{price} Р</p>
-                <button onClick={()=>handleAddToCart()}>В КОРЗИНУ</button>
+                <button onClick={isAuth ? ()=>handleAddToCart() : ()=>navigate('/register')}>В КОРЗИНУ</button>
             </div>
         </div>
         

@@ -2,11 +2,13 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setVisible } from '../Redux/slices/cartSlice'
 import CartProduct from './CartProduct'
+import { Link } from 'react-router-dom'
 
 export default function CartPopUp() {
     const dispatch = useDispatch()
     const isVisible = useSelector((state)=>state.cart.isVisible)
     const products = useSelector((state)=> state.cart.products)
+    
     return (
     <>
         {isVisible 
@@ -18,21 +20,28 @@ export default function CartPopUp() {
                 </div>
                 {products.length === 0
                     ?
-                    <div>ЗДЕСЬ НИЧЕГО НЕТ</div>
+                    <span>ЗДЕСЬ НИЧЕГО НЕТ</span>
                     :
-                    <></>
+                    <div>
+                        <div>               
+                            {products.map((product, id)=>{              
+                                return <CartProduct
+                                    key={id}
+                                    id={id}
+                                    name={product.name}
+                                    description={product.description}
+                                    img={product.img}
+                                    count={product.count}
+                                    toppings={product.toppings ? product.toppings : []}
+                                />             
+                            })}
+                        </div>
+                        <Link to='/order' className='block ml-auto mt-4 p-3 rounded-lg w-[150px] bg-red-700 hover:bg-red-500 '>
+                            Оформить заказ
+                        </Link>
+                    </div>
                 }
-                {products.map((product, id)=>{              
-                    return <CartProduct
-                        key={id}
-                        id={id}
-                        name={product.name}
-                        description={product.description}
-                        img={product.img}
-                        count={product.count}
-                        toppings={product.toppings ? product.toppings : []}
-                    />             
-                })}
+            
             </div> 
             :
             <></>  

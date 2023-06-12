@@ -13,8 +13,7 @@ const Categories = () => {
     const navigate = useNavigate()
     const location = useLocation()
     const currentPath = location.pathname.replace(/^\/main\//, "")
-
-    const [active, setActive] = useState(path.indexOf(currentPath));
+    const [active, setActive] = useState(path.indexOf(currentPath) ? 0 : path.indexOf(currentPath));
 
     const dispatch = useDispatch();
     
