@@ -83,7 +83,7 @@ function Form({ handleAuth, title}) {
           </div>
         </form>
         <div className="text-center"> 
-          <Link className="block mt-2 text-sm font-bold text-blue-500 hover:text-blue-800" to="/main">
+          <Link className="block mt-2 text-sm font-bold text-blue-500 hover:text-blue-800" to="/main/popular">
             Назад
           </Link>        
         </div>

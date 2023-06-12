@@ -46,6 +46,7 @@ export const productPopUpSlice = createSlice({
               isPopUpVisible: false,
               productCount: 1,
               toppings: newToppings,
+              selectedToppings:[]
             };
           },          
           increaseToppingCount: (state, action) => {

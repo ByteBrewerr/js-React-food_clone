@@ -6,6 +6,8 @@ import { IoIosAdd, IoIosRemove } from 'react-icons/io';
 import { increaseCount } from '../Redux/slices/productPopUpSlice';
 import { decreaseCount } from '../Redux/slices/productPopUpSlice';
 import { toast } from "react-toastify";
+import useIsInCart from '../hooks/use-isInCart';
+import { increaseProductCount } from '../Redux/slices/cartSlice';
 
 
 const ProductPopUp = () => {
@@ -14,19 +16,25 @@ const ProductPopUp = () => {
     const toppings = useSelector((state) => state.productPopUp.toppings);
     const productCount = useSelector((state) => state.productPopUp.productCount);
     const totalToppingPrice = useSelector((state)=> state.productPopUp.totalToppingPrice)
+
+    const selectedToppings = toppings.filter(topping => topping.count >= 1);
+
+    const { isInCart, id } = useIsInCart({name: selectedProduct.name, toppings: selectedToppings});
+
     const dispatch = useDispatch()
 
     const priceCalculate = ()=>{
       return (selectedProduct.price + totalToppingPrice) * productCount
     }
-    const addProductToCart = async () => {
-      try {
+    const addProductToCart = () => {
+      if (!isInCart){
         dispatch(createProductWithOptions());
-        dispatch(setPopUpInvisible());
-        toast(`${productCount}x ${selectedProduct.name} добавлен в корзину`)
-      } catch (error) {
-        alert(error);
       }
+      else{
+         dispatch(increaseProductCount({id, productCount}))
+      }
+      dispatch(setPopUpInvisible());
+      toast(`${productCount}x ${selectedProduct.name} добавлен в корзину`)     
     };
     
     
@@ -61,7 +69,7 @@ const ProductPopUp = () => {
                     </div>
                   </div>
                   <div className='border-b-[1px]'></div>
-                  <div className='grid grid-cols-2 gap-x-8 gap-y-4'>
+                  <div  className='grid grid-cols-2 gap-x-8 gap-y-4'>
                     {toppings.map((topping)=>(
                         <Topping key={topping.id} name={topping.name} price={topping.price} count={topping.count}/>                   
                     ))}                               

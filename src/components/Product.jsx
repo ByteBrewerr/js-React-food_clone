@@ -1,27 +1,26 @@
 import React from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {setPopUpVisible } from '../Redux/slices/productPopUpSlice';
 import {addProduct} from "../Redux/slices/cartSlice";
 import { toast } from "react-toastify";
+import { increaseProductCount } from '../Redux/slices/cartSlice';
+import useIsInCart from '../hooks/use-isInCart';
 
 const Product = ({img, name, description, price, quantity, type, toppings}) => {
     const dispatch = useDispatch()  
+
     const product = {img, name, description, price, quantity, toppings}
-    const cartProducts = useSelector((state)=> state.cart.products)
+
+    const { isInCart, id } = useIsInCart({name: product.name, toppings: toppings});
+
     let haveOptionButton = null
     if (type==='Бургеры'){
         haveOptionButton = true
     }
 
-    const isAlreadyInCart = (product) => {
-        return cartProducts.some(item => {
-            console.log('a')
-            return item.name === product.name && JSON.stringify(item.toppings) === JSON.stringify(product.toppings);
-        });
-        };
-
+  
     const handleAddToCart = () => {
-        if (!isAlreadyInCart({name: product.name, count: 1, toppings: toppings, })){
+        if (!isInCart){
             dispatch(addProduct({
                 name: name,
                 count: 1,
@@ -32,7 +31,7 @@ const Product = ({img, name, description, price, quantity, type, toppings}) => {
             }));      
         }
         else{
-            console.log('incart')
+            dispatch(increaseProductCount(id))
         }
         toast(`1x ${product.name} добавлен в корзину`)
     }
@@ -62,6 +61,7 @@ const Product = ({img, name, description, price, quantity, type, toppings}) => {
                 <button onClick={()=>handleAddToCart()}>В КОРЗИНУ</button>
             </div>
         </div>
+        
     );
 };
 

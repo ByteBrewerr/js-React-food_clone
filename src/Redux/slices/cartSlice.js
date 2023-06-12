@@ -17,13 +17,14 @@ export const cartSlice = createSlice({
             return {...state, isVisible: !state.isVisible}
         },
         increaseProductCount:(state, action)=>{
-            const id = action.payload
+            const id = action.payload.id
+            const countToAdd = action.payload.productCount
             const newProducts = state.products.map((product, index) => {
                 if (index === id) {
                   return {
                     ...product,
-                    count: product.count + 1,
-                    price: (product.price / product.count) * (product.count + 1)
+                    count: product.count + countToAdd,
+                    price: (product.price / product.count) * (product.count + countToAdd)
                   }
                 }
                 return product;

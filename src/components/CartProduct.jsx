@@ -43,12 +43,12 @@ export default function CartProduct({name, description, img, toppings, id}) {
           <span>
             {count}
           </span>
-          <button onClick={()=>{dispatch(increaseProductCount(id))}} className='bg-red-700 px-1 rounded-full hover:scale-[95%] transition-transform active:scale-[85%]'>
+          <button onClick={()=>{dispatch(increaseProductCount({id, productCount: 1}))}} className='bg-red-700 px-1 rounded-full hover:scale-[95%] transition-transform active:scale-[85%]'>
             <IoIosAdd size={15}/>
           </button>
-
-          <span>{price}</span>
-
+          <span>
+            {price}
+          </span>
           <button onClick={()=>{dispatch(deleteProduct(id))}} className='pointer'>
             <DeleteForeverIcon sx={{ "&:hover": { color: "red" } }}/>       
           </button>
