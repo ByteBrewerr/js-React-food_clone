@@ -4,7 +4,7 @@ import {setPopUpVisible } from '../Redux/slices/productPopUpSlice';
 import {addProduct} from "../Redux/slices/cartSlice";
 import { toast } from "react-toastify";
 import { increaseProductCount } from '../Redux/slices/cartSlice';
-import useIsInCart from '../hooks/use-isInCart';
+import useCart from '../hooks/use-cart';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/use-auth';
 
@@ -13,7 +13,7 @@ const Product = ({img, name, description, price, quantity, type, toppings}) => {
 
     const product = {img, name, description, price, quantity, toppings}
 
-    const { isInCart, id } = useIsInCart({name: product.name, toppings: toppings});
+    const { isInCart, id } = useCart({name: product.name, toppings});
     const {isAuth} = useAuth()
 
     const navigate = useNavigate()
@@ -24,9 +24,10 @@ const Product = ({img, name, description, price, quantity, type, toppings}) => {
         haveOptionButton = true
     }
 
-  
+
     const handleAddToCart = () => {
         if (!isInCart){
+            console.log('not in cart')
             dispatch(addProduct({
                 name: name,
                 count: 1,
@@ -37,7 +38,7 @@ const Product = ({img, name, description, price, quantity, type, toppings}) => {
             }));      
         }
         else{
-            dispatch(increaseProductCount(id))
+            dispatch(increaseProductCount({id, productCount: 1}))
         }
         toast(`1x ${product.name} добавлен в корзину`)
     }

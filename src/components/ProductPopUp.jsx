@@ -6,7 +6,7 @@ import { IoIosAdd, IoIosRemove } from 'react-icons/io';
 import { increaseCount } from '../Redux/slices/productPopUpSlice';
 import { decreaseCount } from '../Redux/slices/productPopUpSlice';
 import { toast } from "react-toastify";
-import useIsInCart from '../hooks/use-isInCart';
+import useCart from '../hooks/use-cart';
 import { increaseProductCount } from '../Redux/slices/cartSlice';
 
 
@@ -21,7 +21,7 @@ const ProductPopUp = () => {
 
     const selectedToppings = toppings.filter(topping => topping.count >= 1);
 
-    const { isInCart, id } = useIsInCart({name: selectedProduct.name, toppings: selectedToppings});
+    const { isInCart, id } = useCart({name: selectedProduct.name, toppings: selectedToppings});
 
     const priceCalculate = ()=>{
       return (selectedProduct.price + totalToppingPrice) * productCount

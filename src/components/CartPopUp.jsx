@@ -23,18 +23,20 @@ export default function CartPopUp() {
                     <span>ЗДЕСЬ НИЧЕГО НЕТ</span>
                     :
                     <div>
-                        <div>               
-                            {products.map((product, id)=>{              
-                                return <CartProduct
-                                    key={id}
-                                    id={id}
-                                    name={product.name}
-                                    description={product.description}
-                                    img={product.img}
-                                    count={product.count}
-                                    toppings={product.toppings ? product.toppings : []}
-                                />             
-                            })}
+                        <div className=' overflow-auto'>     
+                            <div className='mr-4 max-h-[500px]'>           
+                                {products.map((product, id)=>{              
+                                    return <CartProduct
+                                        key={id}
+                                        id={id}
+                                        name={product.name}
+                                        description={product.description}
+                                        img={product.img}
+                                        count={product.count}
+                                        toppings={product.toppings ? product.toppings : []}
+                                    />             
+                                })}
+                            </div>    
                         </div>
                         <Link to='/order' className='block ml-auto mt-4 p-3 rounded-lg w-[150px] bg-red-700 hover:bg-red-500 '>
                             Оформить заказ

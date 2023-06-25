@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React, {useState } from 'react';
 import { Link } from 'react-router-dom';
+import useAuth from '../../hooks/use-auth';
+import 'firebase/compat/auth';
 
 function Form({ handleAuth, title}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [userName, setUserName] = useState('')
+
   const isLoginPage = title === 'Войти'
+
+
 
   return (
     <div className="max-w-md w-full mx-auto mt-[10%]">
@@ -17,11 +22,11 @@ function Form({ handleAuth, title}) {
             <></>
             :
             <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+            <label className="block text-red-700 text-sm font-bold mb-2" htmlFor="email">
               Name
             </label>
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-red-700 leading-tight focus:outline-none focus:shadow-outline"
               id="userName"
               type="userName"
               placeholder="Ivan"
@@ -31,11 +36,11 @@ function Form({ handleAuth, title}) {
           </div>
           }          
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+            <label className="block text-red-700 text-sm font-bold mb-2" htmlFor="email">
               Email
             </label>
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-red-700 leading-tight focus:outline-none focus:shadow-outline"
               id="email"
               type="email"
               placeholder="you@example.com"
@@ -44,11 +49,11 @@ function Form({ handleAuth, title}) {
             />
           </div>
           <div className="mb-6">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+            <label className="block text-red-700 text-sm font-bold mb-2" htmlFor="password">
               Password
             </label>
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-red-700 leading-tight focus:outline-none focus:shadow-outline"
               id="password"
               type="password"
               placeholder="********"
@@ -58,7 +63,7 @@ function Form({ handleAuth, title}) {
           </div>
           <div className="flex items-center justify-between">
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="button"
               onClick={() => handleAuth(email, password, userName)}
             >
@@ -66,16 +71,16 @@ function Form({ handleAuth, title}) {
             </button>
             {isLoginPage ? (
               <span>
-                <p className='text-blue-500 text-lg'>Нет учетной записи?</p>
-                <Link className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" to="/register">
+                <p className='text-red-500 text-lg'>Нет учетной записи?</p>
+                <Link className="inline-block align-baseline font-bold text-sm text-red-500 hover:text-red-800" to="/register">
                   Зарегистрироваться
                 </Link>   
               </span>   
               
             ) : (
               <span className="flex justify-center items-center flex-col">
-                <p className='text-blue-500 text-lg'>Есть учетная запись?</p>
-                <Link className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" to="/login">
+                <p className='text-red-500 text-lg'>Есть учетная запись?</p>
+                <Link className="inline-block align-baseline font-bold text-sm text-red-500 hover:text-red-800" to="/login">
                   Войти
                 </Link>     
               </span>               
@@ -83,7 +88,7 @@ function Form({ handleAuth, title}) {
           </div>
         </form>
         <div className="text-center"> 
-          <Link className="block mt-2 text-sm font-bold text-blue-500 hover:text-blue-800" to="/main/popular">
+          <Link className="block mt-2 text-sm font-bold text-red-500 hover:text-red-800" to="/main/popular">
             Назад
           </Link>        
         </div>

@@ -1,12 +1,12 @@
 import React from 'react'
-import Login from '../components/auth/Login'
+import SignUp from '../../components/auth/SignUp'
 
 export default function Register() {
   
     
   return (
     <div>
-      <Login/>
+      <SignUp/>
     </div>
   )
 }

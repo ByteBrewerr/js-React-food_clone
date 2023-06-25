@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 
-export default function useIsInCart(product) {
+export default function useCart(product) {
     const cartProducts = useSelector((state) => state.cart.products);
 
     let id = null;

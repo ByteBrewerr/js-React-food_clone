@@ -12,27 +12,14 @@ import {useNavigate} from "react-router-dom";
 export default function SignUp() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
     const handleSignUp = (email, password, userName) => {
         const auth = getAuth()
         createUserWithEmailAndPassword(auth, email, password)
         .then(({user})=>{
             const userCollection = collection(db, 'users')
-            const q = query(userCollection, where('email', '==', email ))
             addDoc(userCollection, {userName: userName,email: user.email,id: user.uid})
-            
-            dispatch(setUser({
-                email: user.email,
-                id: user.uid,
-                token: user.accessToken,
-                userName: userName
-            }))
-            getDocs(q).then(res=> {
-                    res.docs.map(doc =>({
-                    data:doc.data(),
-                    id: doc.id,
-                }))
-            })
-
+            dispatch(setUser(user))        
             navigate('/main');
         })
         .catch(console.error)

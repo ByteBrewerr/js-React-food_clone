@@ -8,6 +8,7 @@ export default function Cart() {
     const dispatch = useDispatch()
     const selectedProduct = useSelector((state) => state.productPopUp.selectedProductWithToppings);
     const cartProducts = useSelector((state)=> state.cart.products)
+    
     let isEmpty = Object.keys(selectedProduct).length === 0
     useEffect(()=>{
         if(!isEmpty){
