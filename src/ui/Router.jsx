@@ -1,12 +1,15 @@
 import React from 'react'
-import Main from "../pages/MainPage";
+import MainPage from "../pages/MainPage";
 import { Route, Routes } from "react-router-dom";
-import Feedback from "../pages/FeedbackPage";
-import Offers from "../pages/OffersPage";
+import FeedbackPage from "../pages/FeedbackPage";
+import OffersPage from "../pages/OffersPage";
 import Layout from '../components/Layout';
-import Login from '../pages/auth/LoginPage';
-import SignUp from '../pages/auth/RegisterPage';
+import LoginPage from '../pages/auth/LoginPage';
+import SignUpPage from '../pages/auth/RegisterPage';
 import OrderPage from '../pages/OrderPage';
+import UserPage from '../pages/UserPage';
+import UserInfo from '../components/profile/userInfo/UserInfoContainer';
+
 
 export default function Router() {
   return (
@@ -15,34 +18,41 @@ export default function Router() {
             <Route
             index
             redirectTo="/main/popular"
-            element={<Main />}
+            element={<MainPage />}
             />
             <Route
             ind
             path="/main/*"
-            element={<Main />}
+            element={<MainPage />}
             />
             <Route
             path="/offers"
-            element={<Offers />}
+            element={<OffersPage />}
             />
             <Route
             path="/feedback"
-            element={<Feedback />}
+            element={<FeedbackPage />}
             />
         </Route>       
         <Route
             path="/login"
-            element={<Login />}
+            element={<LoginPage />}
         />
         <Route
             path="/register"
-            element={<SignUp/>}
+            element={<SignUpPage/>}
         />
         <Route
             path="/order"
             element={<OrderPage/>}
         />
+        <Route path="/profile" element={<UserPage/>}>
+            <Route
+            index
+            path="/profile/credential"
+            element={<UserInfo />}
+            />
+        </Route>   
     </Routes>
   )
 }

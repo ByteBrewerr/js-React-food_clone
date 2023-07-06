@@ -7,6 +7,7 @@ function Form({ handleAuth, title}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [userName, setUserName] = useState('')
+  const [gender, setGender] = useState('Мужской')
 
   const isLoginPage = title === 'Войти'
 
@@ -48,6 +49,31 @@ function Form({ handleAuth, title}) {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
+          {isLoginPage 
+            ?
+            <></>
+            :
+            <>
+              <input
+                className="mr-2 leading-tight cursor-pointer"
+                id="gender"
+                type="radio"
+                value="male"
+                checked={gender === 'Мужской'}
+                onChange={(e) => setGender(e.target.value)}
+              />
+              <label className="mr-2 text-red-600 cursor-pointer" onClick={()=>{setGender('male')}}>Мужчина</label>
+              <input
+                className="mr-2 leading-tight cursor-pointer"
+                id="gender"
+                type="radio"
+                value="female"
+                checked={gender === 'Женский'}
+                onChange={(e) => setGender(e.target.value)}
+              />
+              <label className="mr-2 text-red-600 cursor-pointer" onClick={()=>{setGender('female')}}>Женщина</label>
+            </>
+          }
           <div className="mb-6">
             <label className="block text-red-700 text-sm font-bold mb-2" htmlFor="password">
               Password
@@ -65,7 +91,7 @@ function Form({ handleAuth, title}) {
             <button
               className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="button"
-              onClick={() => handleAuth(email, password, userName)}
+              onClick={() => handleAuth(email, password, userName, gender)}
             >
               {title}
             </button>

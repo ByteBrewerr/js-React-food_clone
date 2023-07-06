@@ -18,11 +18,11 @@ body{
 
 }
 li {
-    border-bottom: 2px solid white;
+
 }
 ul li:hover {
     color: rgb(247, 82, 82);
-    border-bottom-color: rgb(247, 82, 82) !important;
+
 }
 
 ul li:hover a {
@@ -30,6 +30,6 @@ ul li:hover a {
 }
 .active {
     color: rgb(247, 82, 82);
-    border-bottom: 4px solid rgb(247, 82, 82) !important;
+
 }
     

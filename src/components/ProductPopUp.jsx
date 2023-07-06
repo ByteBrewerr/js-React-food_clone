@@ -27,7 +27,6 @@ const ProductPopUp = () => {
       return (selectedProduct.price + totalToppingPrice) * productCount
     }
     const addProductToCart = () => {
-
       if (!isInCart){
         dispatch(createProductWithOptions());
       }

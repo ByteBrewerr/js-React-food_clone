@@ -13,7 +13,6 @@ import { useDispatch } from 'react-redux';
 
 function App() {
   const dispatch = useDispatch()
-  const {isAuth} = useAuth()
   const auth = getAuth()
 
   useEffect(()=>{
