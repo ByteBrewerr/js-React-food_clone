@@ -18,7 +18,7 @@ export default function SignUp() {
         .then(({user})=>{
             const userCollection = collection(db, 'users')
             addDoc(userCollection, {userName: userName,email: user.email,id: user.uid, gender: gender,})
-            dispatch(setUser({...user,gender,userName,}))        
+            dispatch(setUser({...user,gender,userName,}))      
             navigate('/main');
         })
         .catch(alert.error)

@@ -56,22 +56,22 @@ function Form({ handleAuth, title}) {
             <>
               <input
                 className="mr-2 leading-tight cursor-pointer"
-                id="gender"
+                id="male"
                 type="radio"
-                value="male"
+                value="Мужской"
                 checked={gender === 'Мужской'}
                 onChange={(e) => setGender(e.target.value)}
               />
-              <label className="mr-2 text-red-600 cursor-pointer" onClick={()=>{setGender('male')}}>Мужчина</label>
+              <label className="mr-2 text-red-600 cursor-pointer" onClick={()=>{setGender('male')}} htmlFor='male'>Мужчина</label>
               <input
                 className="mr-2 leading-tight cursor-pointer"
-                id="gender"
+                id="female"
                 type="radio"
-                value="female"
+                value="Женский"
                 checked={gender === 'Женский'}
                 onChange={(e) => setGender(e.target.value)}
               />
-              <label className="mr-2 text-red-600 cursor-pointer" onClick={()=>{setGender('female')}}>Женщина</label>
+              <label className="mr-2 text-red-600 cursor-pointer" onClick={()=>{setGender('female')}} htmlFor='female'>Женщина</label>
             </>
           }
           <div className="mb-6">

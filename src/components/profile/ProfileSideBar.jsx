@@ -9,8 +9,8 @@ export default function ProfileSideBar() {
   const dispatch = useDispatch();
   const [activeId, setActiveId] = useState(0);
 
-  const handleSignOut = () => {
-    signOut(auth);
+  const handleSignOut = async() => {
+    await signOut(auth);
     dispatch(removeUser());
   };
 
