@@ -1,5 +1,4 @@
 import './App.css';
-import {useEffect} from 'react'
 import ScrollButton from "./components/ScrollButton";
 import Header from "./components/Header";
 import { ToastContainer } from 'react-toastify';
@@ -8,20 +7,20 @@ import Router from './ui/Router';
 import useAuthListener from './hooks/use-authListener';
 
 
+
 function App() {
-  useAuthListener()
-  
+  useAuthListener() 
   return (
-    <div>
+    <>
       <ToastContainer
         autoClose={3000}
         draggable = {false}
         pauseOnHover = {false}
       />
-        <Header/>      
+        <Header/>    
         <Router/>
         <ScrollButton/>
-    </div>
+    </>
   );
   }
 

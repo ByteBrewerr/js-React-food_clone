@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Loader from '../../../common/Loader'
 import { updateUser } from '../../../Redux/slices/userSlice';
+import LoadingButton from '../../../common/LoadingButton';
+import { AiOutlineClose } from 'react-icons/ai';
 
-export default function UserPopup({ isVisible, setIsVisible, id,}) {
-  const dispatch = useDispatch()
-  const isLoading = useSelector(state => state.user.isLoading)
+export default function UserPopup({ isVisible, setIsVisible, id }) {
+  const dispatch = useDispatch();
+  const isLoading = useSelector(state => state.user.isLoading);
   const [inputUserName, setInputUserName] = useState('');
   const [inputGender, setInputGender] = useState('');
 
@@ -19,10 +20,10 @@ export default function UserPopup({ isVisible, setIsVisible, id,}) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (inputUserName.length < 3){
-      alert('Имя должно содержать минимум 3 символа')
-      return 
-    } 
+    if (inputUserName.length < 3) {
+      alert('Имя должно содержать минимум 3 символа');
+      return;
+    }
 
     if (inputGender === '') {
       alert('Выберите пол');
@@ -30,9 +31,9 @@ export default function UserPopup({ isVisible, setIsVisible, id,}) {
     }
 
     dispatch(updateUser({ userName: inputUserName, gender: inputGender }))
-    .then(() => {
-      setIsVisible(false)
-    });
+      .then(() => {
+        setIsVisible(false);
+      });
   };
 
   if (!isVisible) {
@@ -43,9 +44,12 @@ export default function UserPopup({ isVisible, setIsVisible, id,}) {
     <div className="fixed inset-0 flex items-center justify-center z-10">
       <div className="absolute inset-0 bg-black opacity-50"></div>
       <div className="bg-gray-900 p-8 rounded-lg relative">
-        {isLoading && (
-          <Loader />
-        )}
+        <button
+          className="absolute top-2 right-2 text-white"
+          onClick={() => setIsVisible(false)}
+        >
+          <AiOutlineClose/>
+        </button>
         <h2 className="text-white text-xl font-bold mb-4">Личные данные</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -64,7 +68,7 @@ export default function UserPopup({ isVisible, setIsVisible, id,}) {
               UserName:
             </label>
             <input
-              placeholder='Ваше новое имя'
+              placeholder="Ваше новое имя"
               type="text"
               name="userName"
               value={inputUserName}
@@ -82,23 +86,20 @@ export default function UserPopup({ isVisible, setIsVisible, id,}) {
               onChange={handleInputChange}
               className="border-2 border-gray-400 rounded w-full px-3 py-2 text-black"
             >
-              <option value="" disabled>Выберите пол</option>
+              <option value="" disabled>
+                Выберите пол
+              </option>
               <option value="Мужской">Мужской</option>
               <option value="Женский">Женский</option>
             </select>
           </div>
-          <button
-            className="bg-red-500 text-white px-4 py-2 rounded mr-4"
-            onClick={()=>setIsVisible(false)}
-          >
-            Назад
-          </button>
-          <button
-            className="bg-red-500 text-white px-4 py-2 rounded"
+          <LoadingButton
+            className="bg-red-500 text-white rounded p-2"
+            isLoading={isLoading}
             onClick={handleSubmit}
           >
-            Сохранить
-          </button>
+            <p>Сохранить</p>
+          </LoadingButton>
         </form>
       </div>
     </div>

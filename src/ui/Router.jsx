@@ -8,7 +8,7 @@ import LoginPage from '../pages/auth/LoginPage';
 import SignUpPage from '../pages/auth/RegisterPage';
 import OrderPage from '../pages/OrderPage';
 import UserPage from '../pages/UserPage';
-import UserInfo from '../components/profile/userInfo/UserInfoContainer';
+import UserInfoContainer from '../components/profile/userInfo/UserInfoContainer';
 
 
 export default function Router() {
@@ -50,7 +50,7 @@ export default function Router() {
             <Route
             index
             path="/profile/credential"
-            element={<UserInfo />}
+            element={<UserInfoContainer />}
             />
         </Route>   
     </Routes>

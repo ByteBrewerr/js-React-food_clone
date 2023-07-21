@@ -24,10 +24,15 @@ const Categories = () => {
 
 
     useEffect(() => {
-        dispatch(fetchProducts(categories[active]));
-        dispatch(fetchToppings());
-        navigate(`/main/${path[active]}`);
-    }, [active]);
+        const fetchData = async () => {
+            const promise1 = dispatch(fetchProducts(categories[active]));
+            const promise2 = dispatch(fetchToppings());
+            await Promise.all([promise1, promise2]);
+            navigate(`/main/${path[active]}`);
+        };
+        fetchData();
+      }, [active]);
+      
 
     
     return (

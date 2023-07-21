@@ -1,12 +1,10 @@
 import React from 'react'
-import { ClipLoader } from 'react-spinners';
+import {ThreeDots} from 'react-loader-spinner';
 
-export default function Loader() {
+export default function Loader({color = 'red', w,h}) {
     return (
-      <div className="flex justify-center items-center absolute inset-0">
-          <div className="flex justify-center items-center h-screen">
-          <ClipLoader color={'#fff'} size={200} />
-        </div>
-      </div>    
+      <>
+         <ThreeDots color={color} height={h} width={w} />
+      </>    
       );
 }

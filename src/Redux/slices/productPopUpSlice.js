@@ -129,6 +129,7 @@ export const productPopUpSlice = createSlice({
                 return{...state, toppings: action.payload, toppingsLoading: false}
             })
             .addCase(fetchToppings.rejected, (state) => {
+                alert('Ошибка, что-то пошло не так')
                 return{...state, toppingsLoading: false}
             });
     },

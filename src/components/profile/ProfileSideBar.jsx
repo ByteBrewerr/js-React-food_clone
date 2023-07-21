@@ -7,7 +7,7 @@ import { removeUser } from '../../Redux/slices/userSlice';
 export default function ProfileSideBar() {
   const auth = getAuth();
   const dispatch = useDispatch();
-  const [activeId, setActiveId] = useState(0);
+  const [activeId, setActiveId] = useState(1);
 
   const handleSignOut = async() => {
     await signOut(auth);

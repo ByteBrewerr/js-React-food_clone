@@ -15,7 +15,7 @@ export default function Login() {
         .then(({user})=>{ 
           dispatch(setUser(user))
           navigate('/main');
-      })
+        })
       .catch(()=>alert('Invalid user'))
     }
 

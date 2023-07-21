@@ -1,8 +1,8 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setUser, updateUser } from '../../../Redux/slices/userSlice';
+import { setUser } from '../../../../Redux/slices/userSlice';
 
-const Addresses = () => {
+const NewAddressesForm = () => {
   const [name, setName] = useState('');
   const [house, setHouse] = useState('');
   const [street, setStreet] = useState('');
@@ -10,20 +10,20 @@ const Addresses = () => {
   const [doorCode, setDoorCode] = useState('');
   const [floor, setFloor] = useState('');
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(setUser())
+    dispatch(setUser());
   };
 
   return (
     <>
-      <div className='flex justify-star mt-4 '>   
-          <span className='mb-4 text-xl font-bold inline-block'>Ваши адресы</span>
+      <div className="flex justify-star mt-4">
+        <span className="mb-4 text-xl font-bold inline-block">Ваши адресы</span>
       </div>
       <h1 className="text-xl font-bold mb-4">Создать адрес</h1>
-      <form onSubmit={handleSubmit} >
+      <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label htmlFor="name" className="block text-sm font-medium mb-1 text-red-500">
             Название адреса *
@@ -99,10 +99,7 @@ const Addresses = () => {
             onChange={(e) => setFloor(e.target.value)}
           />
         </div>
-        <button
-          type="submit"
-          className="bg-blue-500 text-white py-2 px-4 rounded "
-        >
+        <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded">
           Добавить
         </button>
       </form>
@@ -110,4 +107,4 @@ const Addresses = () => {
   );
 };
 
-export default Addresses;
+export default NewAddressesForm;

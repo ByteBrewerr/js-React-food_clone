@@ -11,23 +11,18 @@ import useAuth from '../hooks/use-auth';
 const Product = ({img, name, description, price, quantity, type, toppings}) => {
     const dispatch = useDispatch()  
 
-    const product = {img, name, description, price, quantity, toppings}
 
-    const { isInCart, id } = useCart({name: product.name, toppings});
+    const { isInCart, id } = useCart({name, toppings});
     const {isAuth} = useAuth()
 
     const navigate = useNavigate()
 
-
-    let haveOptionButton = null
-    if (type==='Бургеры'){
-        haveOptionButton = true
-    }
+    const haveOptionButton = type==='Бургеры'
+    
 
 
     const handleAddToCart = () => {
         if (!isInCart){
-            console.log('not in cart')
             dispatch(addProduct({
                 name: name,
                 count: 1,
@@ -40,7 +35,7 @@ const Product = ({img, name, description, price, quantity, type, toppings}) => {
         else{
             dispatch(increaseProductCount({id, productCount: 1}))
         }
-        toast(`1x ${product.name} добавлен в корзину`)
+        toast(`1x ${name} добавлен в корзину`)
     }
 
     return (
@@ -55,7 +50,7 @@ const Product = ({img, name, description, price, quantity, type, toppings}) => {
                     <p>{quantity}</p>
                     {haveOptionButton
                         ? 
-                        <button onClick={isAuth ? ()=>dispatch(setPopUpVisible(product)) : ()=>navigate('/register')} className='bg-red-500 p-2 rounded-lg'>
+                        <button onClick={isAuth ? ()=>dispatch(setPopUpVisible({img, name, description, price, quantity, toppings})) : ()=>navigate('/register')} className='bg-red-500 p-2 rounded-lg'>
                             Опции
                         </button>
                         :

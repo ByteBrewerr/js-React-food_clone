@@ -10,15 +10,11 @@ import {
 import { db } from "../../firebase";
 import { toast } from "react-toastify";
 
-export const setUser = createAsyncThunk("setUser", async (user) => {
-    console.log(user)
-    
+export const setUser = createAsyncThunk("setUser", async (user) => { 
     const userCollection = collection(db, "users");
     const q = query(userCollection, where("email", "==", user.email));
     const response = await getDocs(q);
-
     const {userName, gender, addresses} = response.docs[0].data();
-
     const newUser = {
         email: user.email,
         id: user.uid,
@@ -26,14 +22,11 @@ export const setUser = createAsyncThunk("setUser", async (user) => {
         gender,
         addresses,
     };
-
     return {
         ...newUser,
     };
 });
-export const updateUser = createAsyncThunk(
-  "updateUser",
-  async ({ userName, gender }, thunkAPI) => {
+export const updateUser = createAsyncThunk("updateUser", async ({ userName, gender }, thunkAPI) => {
     const { user } = thunkAPI.getState();
     const userCollection = collection(db, "users");
     const q = query(userCollection, where("email", "==", user.email));
@@ -42,7 +35,6 @@ export const updateUser = createAsyncThunk(
       userName,
       gender,
     });
-
     return {
       ...user,
       userName,
@@ -50,6 +42,13 @@ export const updateUser = createAsyncThunk(
     };
   }
 );
+export const addAddress = createAsyncThunk("updateUser", async ({ userName, gender }, thunkAPI) => {
+ 
+})
+
+export const deleteAddress = createAsyncThunk("updateUser", async ({ userName, gender }, thunkAPI) => {
+ 
+});
 
 const initialState = {
   email: null,
@@ -59,22 +58,11 @@ const initialState = {
   addresses: [],
   isLoading: false,
 };
+
 export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setUserFromLocalStorage(_, { payload }) {
-      const storage = payload;
-      const User = {
-        email: storage.email,
-        id: storage.id,
-        name: storage.name,
-        gender: storage.gender,
-        addresses: storage.addresses,
-      };
-      return { ...User };
-    },
-
     removeUser(state) {
       return {
         ...state,
@@ -89,22 +77,30 @@ export const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(setUser.pending, (state, action) => {})
+      .addCase(setUser.pending, (state, action) => {
+        return {...state, isLoading: true}
+      })
       .addCase(setUser.fulfilled, (state, action) => {
         return { ...state, isLoading: false, ...action.payload };
+      })
+      .addCase(setUser.rejected, (state, action) => {
+        alert('Ошибка, попробуй заного')
       })
       .addCase(updateUser.pending, (state) => {
         return { ...state, isLoading: true };
       })
       .addCase(updateUser.fulfilled, (state, action) => {
+        toast('Данные обновлены')
         return {
           ...state,
           isLoading: false,
           name: action.payload.userName,
           gender: action.payload.gender,
         };
-        toast();
-      });
+      })
+      .addCase(updateUser.rejected, (state) => {
+        alert('Ошибка при обновлении данных')
+      })
   },
 });
 
